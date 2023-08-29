@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "volume-knob",
+    "slug": "volume-knob",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "volume-knob"
+}
