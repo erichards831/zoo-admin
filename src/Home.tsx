@@ -14,9 +14,6 @@ import {
 
 
 const Home: React.FC = ()=>{
-
-
-
     return (
         <View>
 
