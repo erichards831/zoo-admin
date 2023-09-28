@@ -1,0 +1,112 @@
+import React, {useState, useEffect} from "react"
+
+import {View, StyleSheet, TouchableOpacity, Text} from "react-native"
+import globalColors from "../localizations/globalColors"
+import { Ionicon } from "./Icon"
+
+
+type Props={
+    level: number,
+    interval: number,
+    feedLog: string[] ,
+    setFeedLog: (feedLog: []) => void
+}
+const FeedBucket: React.FC<Props> = ({level, interval, feedLog, setFeedLog }) => {
+    const [foodLevel, setFoodLevel] = useState(4)
+    const [foodInterval, setFoodInterval] = useState(null)
+    const [feeding, setFeeding] = useState(false)
+    const [eating, setEating] = useState(true)
+    const [disable, setDisable] = useState(false)
+    const [seconds, setSeconds] = useState(interval)
+    const [countFeed, setCountFeed] = useState(0)
+
+    let timeout;
+
+    useEffect(()=> {
+        foodLevel > 3 ? setDisable(true) : setDisable(false)
+        decrementFood()
+    }, [foodLevel])
+    const decrementFood = () => {
+        if(foodLevel > 1){
+            timeout = setTimeout(()=> setFoodLevel(foodLevel - 1), 5000)
+        }
+    }
+    const incrementFood = () => {
+        const now = new Date()
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
+        // const second = now.getSeconds();
+        let feedDay = month + "/" + day + "/" + year
+        let feedTime = hour + ":" + minute
+        let feedLogItem = feedDay + "\t"  + feedTime
+
+        // console.log(feedDay + "\t" + feedTime)
+        let tempLog = feedLog.slice()
+        !tempLog.includes(feedLogItem) ? tempLog.push(feedLogItem) : null
+
+        setFeedLog(tempLog)
+
+
+        clearTimeout(timeout)
+        let temp = foodLevel;
+        if(temp < 4){
+            temp += 1;
+            setFoodLevel(temp)
+        }
+        setCountFeed(countFeed + 1)
+    }
+
+    return (
+        <View>
+            <View style={styles.container}>
+                {foodLevel > 3 ? <View style={[styles.bucketLevel, {backgroundColor: globalColors.excellent, borderTopLeftRadius: 20, borderTopRightRadius: 20, position:'absolute', bottom: 200}]}/>
+                    : <View style={[styles.lineBreak, {position: 'absolute', top: 50}]}/>}
+                {foodLevel > 2 ? <View style={[styles.bucketLevel, {backgroundColor: globalColors.ok, position: 'absolute', bottom: 150}]}/> :
+                    <View style={[styles.lineBreak, {position: 'absolute', top: 100}]}/>}
+                {foodLevel > 1 ? <View style={[styles.bucketLevel, {backgroundColor: globalColors.bad, position: 'absolute', bottom: 100}]}/>
+                :   <View style={[styles.lineBreak, {position: 'absolute', top: 150}]}/>}
+
+                {foodLevel > 0 ? <View style={[styles.bucketLevel, {backgroundColor: globalColors.veryBad, position:'absolute', bottom: 50}]}/> :
+                    <View style={[styles.lineBreak, {position: 'absolute', top: 200}]}/>}
+
+                <TouchableOpacity onPress={incrementFood} disabled={disable}>
+                    <View style={[styles.bucketLevel, {backgroundColor: !disable ? 'rgba(255, 255, 255, .5)' : 'rgba(0, 0, 0, .25)', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, position: 'absolute', top: 200}]}>
+                        <Text style={[styles.subtitle, disable ? {color: 'rgba(255, 255, 255, .75)'}: null]}>{disable ? "At Full" : "Feed"}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container:{
+        width: 125,
+        height: 250,
+        backgroundColor: 'rgba(255, 255, 255, .5)',
+        borderRadius: 20,
+    },
+    bucketLevel: {
+        height: 50,
+        width: '100%',
+        alignItems:'center',
+        justifyContent: 'center'
+    },
+    subtitle: {
+        fontSize: 20,
+        fontWeight: "600"
+    },
+    lineBreak:{
+        width: '100%',
+        height: 1,
+        backgroundColor: 'rgba(0, 0, 0, .25)',
+
+    }
+
+})
+
+export default FeedBucket;

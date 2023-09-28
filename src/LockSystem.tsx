@@ -6,25 +6,35 @@ import globalColors from "./localizations/globalColors"
 const LockSystem: React.FC = ()=> {
     const [masterLock, setMasterLock] = useState(true)
 
-    const [lock1, setLock1] = useState(false)
-    const [lock2, setLock2] = useState(false)
-    const [lock3, setLock3] = useState(false)
+    const [lock1, setLock1] = useState(true)
+    const [lock2, setLock2] = useState(true)
+    const [lock3, setLock3] = useState(true)
+
+
+    const [temp, setTemp] = useState(true)
+
+
+    // let val = true
 
     const toggleMasterLock = () => {
         setMasterLock(!masterLock)
+        setLock1(!masterLock)
+        setLock2(!masterLock)
+        setLock3(!masterLock)
     }
 
 
     useEffect(()=> {
-        setLock1(masterLock)
-        setLock2(masterLock)
-        setLock3(masterLock)
-    }, [masterLock])
+        if((lock1 && lock2 && lock3) || !(lock1 && lock2 && lock3)){
+            let temp = lock1 && lock2 && lock3
+            setTemp(temp)
+        }
+    }, [lock1, lock2, lock3])
 
 
-    // useEffect(()=> {
-    //     lock1 && lock2 && lock3 ? setMasterLock(lock1) : null
-    // }, [])
+    useEffect(()=> {
+        setMasterLock(temp)
+    }, [temp])
 
     return (
         <SafeAreaView style={styles.container}>

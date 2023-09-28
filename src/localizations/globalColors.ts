@@ -1,8 +1,16 @@
 const globalColors = {
     primary: '#658576',
     primaryDark: '#213b32',
-    
-    secondary: '#e0b331'
+
+    secondary: '#e0b331',
+
+
+    excellent: '#48ff00',
+    good: '#a2ff00',
+    ok: '#e0d731',
+    notOk: '#fa9703',
+    bad: '#ff4d00',
+    veryBad: '#850808',
     // background: '#1f1f31',
     //
     // primary: '#5f5f8a',
