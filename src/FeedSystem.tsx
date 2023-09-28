@@ -1,16 +1,30 @@
+import { useNavigation, useRoute} from "@react-navigation/native";
 import React, {useState, useEffect} from "react"
-import { View, StyleSheet, Text, ScrollView} from "react-native";
+import { View, StyleSheet, Text, ScrollView, Alert} from "react-native";
 import FeedBucket from "./components/FeedBucket"
 
 const FeedSystem:React.FC = ()=> {
     const [feedLog1, setFeedLog1] = useState<string[] >([])
-
+    const nav = useNavigation()
+    const route = useRoute()
 
     useEffect(()=> {
         // console.log(feedLog1)
 
     }, [feedLog1])
 
+
+
+    const [alert, setAlert] = useState(false)
+
+    useEffect(()=> {
+        alert ? lowFoodAlert() : null
+    }, [alert])
+
+
+    const lowFoodAlert = () => {
+        Alert.alert('Low Food for animal!')
+    }
 
 
     return (
@@ -24,7 +38,6 @@ const FeedSystem:React.FC = ()=> {
                         <View style={{width: '60%'}}>
                             <View>
                                 <Text style={styles.text}>Animal 1: Feeding Log</Text>
-
                                 <View style={{paddingTop: 10}}>
                                     <Text style={styles.smallText}>{"Date" +  "\t\t" + "Time"}</Text>
                                     <ScrollView>
@@ -42,7 +55,7 @@ const FeedSystem:React.FC = ()=> {
 
                         </View>
                         <View style={{width: '40%', alignItems: 'flex-end'}}>
-                            <FeedBucket level={5} interval={3000} feedLog={feedLog1} setFeedLog={setFeedLog1}/>
+                            <FeedBucket alert={alert} setAlert={setAlert} interval={3000} feedLog={feedLog1} setFeedLog={setFeedLog1}/>
                         </View>
                     </View>
 

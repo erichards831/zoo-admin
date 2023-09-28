@@ -1,5 +1,5 @@
 import {createStackNavigator} from "@react-navigation/stack";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {DarkTheme, NavigationContainer} from "@react-navigation/native";
 import Home from "./src/Home";
 import LockSystem from "./src/LockSystem"
@@ -9,6 +9,7 @@ import globalColors from "./src/localizations/globalColors"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicon } from "./src/components/Icon";
 import {Text, View} from "react-native"
+import LowFoodAlert from "./src/components/LowFoodAlert"
 
 
 export type RootStackParamList = {
@@ -28,6 +29,12 @@ const DarkThemeApp = {
 }
 
 const AppNavigator: React.FC= ()=>{
+    const [alert, setAlert] = useState(true)
+
+    useEffect(()=> {
+        console.log(alert)
+
+    }, [alert])
     return(
         <NavigationContainer theme={DarkThemeApp}>
             <Tab.Navigator
@@ -46,6 +53,7 @@ const AppNavigator: React.FC= ()=>{
                 }}
 
             >
+
                 <Tab.Screen
                     name={'Home'}
                     component={Home}
@@ -66,6 +74,7 @@ const AppNavigator: React.FC= ()=>{
 
                     }
                     }
+
                 />
                 <Tab.Screen
                     name={'Feed System'}
@@ -86,12 +95,14 @@ const AppNavigator: React.FC= ()=>{
                         )
                     }
                     }
+
                 />
 
 
                 {/*<Tab.Screen name={''}/>*/}
 
             </Tab.Navigator>
+
         </NavigationContainer>
 
         // <NavigationContainer theme={DarkThemeApp}>

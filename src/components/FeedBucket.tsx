@@ -6,12 +6,13 @@ import { Ionicon } from "./Icon"
 
 
 type Props={
-    level: number,
+    alert: boolean,
+    setAlert: (alert: boolean) => void,
     interval: number,
     feedLog: string[] ,
     setFeedLog: (feedLog: []) => void
 }
-const FeedBucket: React.FC<Props> = ({level, interval, feedLog, setFeedLog }) => {
+const FeedBucket: React.FC<Props> = ({alert, setAlert, interval, feedLog, setFeedLog }) => {
     const [foodLevel, setFoodLevel] = useState(4)
     const [foodInterval, setFoodInterval] = useState(null)
     const [feeding, setFeeding] = useState(false)
@@ -23,14 +24,30 @@ const FeedBucket: React.FC<Props> = ({level, interval, feedLog, setFeedLog }) =>
     let timeout;
 
     useEffect(()=> {
+        // const interval = setInterval(()=>  setFoodLevel(foodLevel - 1), 500)
+        // return ()=> clearInterval(interval)
+
+        // decrementFood()
+    }, [])
+
+    useEffect(()=> {
         foodLevel > 3 ? setDisable(true) : setDisable(false)
-        decrementFood()
-    }, [foodLevel])
-    const decrementFood = () => {
-        if(foodLevel > 1){
-            timeout = setTimeout(()=> setFoodLevel(foodLevel - 1), 5000)
+        foodLevel < 2 ? setAlert(true): setAlert(false)
+
+        if(foodLevel < 2){
+            return;
         }
-    }
+        const interval = setInterval(decrement, 20000)
+        return ()=> clearInterval(interval)
+    }, [foodLevel])
+
+    const decrement = () => foodLevel > 1 ? setFoodLevel(foodLevel - 1) : null
+    // const decrementFood = () => {
+    //     if(foodLevel > 1){
+    //         timeout = setTimeout(()=>  setFoodLevel(foodLevel - 1), 10000)
+    //     }
+    // }
+
     const incrementFood = () => {
         const now = new Date()
         const year = now.getFullYear();
@@ -38,9 +55,16 @@ const FeedBucket: React.FC<Props> = ({level, interval, feedLog, setFeedLog }) =>
         const day = now.getDate();
         const hour = now.getHours();
         const minute = now.getMinutes();
+
+        let min = minute.toString();
+        if(minute < 10){
+            min = "0" + minute
+        }
+
+
         // const second = now.getSeconds();
         let feedDay = month + "/" + day + "/" + year
-        let feedTime = hour + ":" + minute
+        let feedTime = hour + ":" + min
         let feedLogItem = feedDay + "\t"  + feedTime
 
         // console.log(feedDay + "\t" + feedTime)
@@ -49,12 +73,13 @@ const FeedBucket: React.FC<Props> = ({level, interval, feedLog, setFeedLog }) =>
 
         setFeedLog(tempLog)
 
-
         clearTimeout(timeout)
         let temp = foodLevel;
         if(temp < 4){
             temp += 1;
             setFoodLevel(temp)
+
+            // clearTimeout(timeout)
         }
         setCountFeed(countFeed + 1)
     }

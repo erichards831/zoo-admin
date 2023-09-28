@@ -1,20 +1,18 @@
 import React, {useState, useEffect} from "react"
-import { View, SafeAreaView, StyleSheet, Text, Switch} from "react-native"
+import { View, SafeAreaView, StyleSheet, Text, Switch, TouchableOpacity} from "react-native"
 import { Ionicon } from "./components/Icon"
 import globalColors from "./localizations/globalColors"
+import LowFoodAlert from "../src/components/LowFoodAlert"
+import {useRoute} from "@react-navigation/native"
 
 const LockSystem: React.FC = ()=> {
-    const [masterLock, setMasterLock] = useState(true)
-
+    const [masterLock, setMasterLock] = useState<boolean | null>(true)
     const [lock1, setLock1] = useState(true)
     const [lock2, setLock2] = useState(true)
     const [lock3, setLock3] = useState(true)
+    const [temp, setTemp] = useState(null)
 
-
-    const [temp, setTemp] = useState(true)
-
-
-    // let val = true
+    const route = useRoute()
 
     const toggleMasterLock = () => {
         setMasterLock(!masterLock)
@@ -25,9 +23,13 @@ const LockSystem: React.FC = ()=> {
 
 
     useEffect(()=> {
-        if((lock1 && lock2 && lock3) || !(lock1 && lock2 && lock3)){
-            let temp = lock1 && lock2 && lock3
+        if((lock1 && lock2 && lock3)){
+            let temp = (lock1 && lock2 && lock3)
             setTemp(temp)
+        }else if((!lock1 && !lock2 && !lock3)){
+            setTemp(false)
+        }else{
+            setTemp(null)
         }
     }, [lock1, lock2, lock3])
 
@@ -36,6 +38,19 @@ const LockSystem: React.FC = ()=> {
         setMasterLock(temp)
     }, [temp])
 
+
+    const [foodAlert, setFoodAlert] = useState(false)
+
+    useEffect(()=> {
+        console.log(foodAlert)
+    }, [foodAlert])
+
+    const alert = route.params
+
+
+
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.masterContainer}>
@@ -43,7 +58,7 @@ const LockSystem: React.FC = ()=> {
                     <View style={{width: '60%'}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                             <View style={{alignSelf: 'flex-start'}}>
-                                <Ionicon name={masterLock ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={masterLock ? globalColors.primaryDark: '#850808'}/>
+                                <Ionicon name={masterLock ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={masterLock !== null ? masterLock ?  globalColors.primaryDark: globalColors.veryBad: globalColors.ok}/>
 
                             </View>
                             <View>
@@ -56,11 +71,18 @@ const LockSystem: React.FC = ()=> {
                     </View>
                     <View style={{width: '40%',}}>
                         <View style={{alignItems:'flex-end'}}>
-                            <Switch
-                                trackColor={{true: '#48ff00',}}
-                                ios_backgroundColor={'#850808'}
-                                value={masterLock}
-                                onValueChange={toggleMasterLock}/>
+                            <TouchableOpacity
+                                style={[styles.masterButton, {backgroundColor: masterLock !== null ? masterLock ?  globalColors.excellent: globalColors.veryBad: globalColors.ok}]}
+                                onPress={()=> toggleMasterLock()}
+                            >
+                                <Text style={[styles.subtitle, {fontSize: 14}]}>{masterLock ? "Locked" : "Unlocked"}</Text>
+
+                            </TouchableOpacity>
+                            {/*<Switch*/}
+                            {/*    trackColor={{true: '#48ff00',}}*/}
+                            {/*    ios_backgroundColor={'#850808'}*/}
+                            {/*    value={masterLock}*/}
+                            {/*    onValueChange={toggleMasterLock}/>*/}
                         </View>
                     </View>
 
@@ -196,6 +218,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, .5)',
         borderRadius: 20,
         alignItems:'center'
+    },
+    masterButton: {
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 15,
+        width: 100,
+        borderWidth: 2,
+        borderColor: 'grey'
     }
 
 

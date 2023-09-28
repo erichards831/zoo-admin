@@ -4,42 +4,49 @@ import globalColors from "../localizations/globalColors"
 import { Ionicon } from "./Icon";
 
 
-type Props ={
+type Props = {
     animal: string,
     vis: boolean,
     setVis: (vis:boolean) => void
 }
-const LowFoodAlert:React.FC<Props> = ({animal}) =>{
-    
+const LowFoodAlert:React.FC<Props> = ({animal, vis, setVis}) =>{
     const close = () => {
-        
+        setVis(false)
     }
     return (
         <View style={styles.container}>
-            <View style={{position: 'absolute', right: 10, top: 10}}>
-                <TouchableOpacity>
-                    <Ionicon size={'large'} color={globalColors.veryBad} name={'ios-close'} />
-                </TouchableOpacity>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{width: '90%'}}>
+                    <Text style={styles.alertText}>Alert! Low food for {animal}!</Text>
+                </View>
+                <View style={{alignSelf: 'flex-end', }}>
+                    <TouchableOpacity onPress={close}>
+                        <Ionicon size={'large'} color={globalColors.veryBad} name={'ios-close'} />
+                    </TouchableOpacity>
+                </View>
+
             </View>
-            <Text>Alert! Low food for {animal}!</Text>
+
         </View>
     )
 }
 const styles = StyleSheet.create({
     container:{
-        width: '95%',
-        height: 100,
+        width: '100%',
+        height: 75,
         padding: 10,
-        backgroundColor: 'rgba(255,136,136,.85)',
+        backgroundColor: 'rgba(255,136,136,.75)',
         borderColor: 'red',
         borderWidth: 1,
-        borderRadius: 20
+        borderRadius: 20,
+        justifyContent: 'center'
+
     },
     alertText: {
-        fontWeight: 'bold', 
+        fontWeight: 'bold',
         fontSize: 22,
         color: globalColors.veryBad
-        
+
     }
 
 })
