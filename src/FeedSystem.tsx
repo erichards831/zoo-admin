@@ -5,25 +5,26 @@ import FeedBucket from "./components/FeedBucket"
 
 const FeedSystem:React.FC = ()=> {
     const [feedLog1, setFeedLog1] = useState<string[] >([])
+    const [feedLog2, setFeedLog2] = useState<string[]>([])
+    const [feedLog3, setFeedLog3] = useState<string[]>([])
     const nav = useNavigation()
     const route = useRoute()
 
     useEffect(()=> {
         // console.log(feedLog1)
-
     }, [feedLog1])
 
 
 
     const [alert, setAlert] = useState(false)
 
-    useEffect(()=> {
-        alert ? lowFoodAlert() : null
-    }, [alert])
+    // useEffect(()=> {
+    //     alert ? lowFoodAlert() : null
+    // }, [alert])
 
 
-    const lowFoodAlert = () => {
-        Alert.alert('Low Food for animal!')
+    const lowFoodAlert = (animal: string) => {
+        Alert.alert(`Low Food for ${animal}!`)
     }
 
 
@@ -37,7 +38,7 @@ const FeedSystem:React.FC = ()=> {
                     <View style={{flexDirection: 'row', width: '100%'}}>
                         <View style={{width: '60%'}}>
                             <View>
-                                <Text style={styles.text}>Animal 1: Feeding Log</Text>
+                                <Text style={styles.text}>Pen 1: Feeding Log</Text>
                                 <View style={{paddingTop: 10}}>
                                     <Text style={styles.smallText}>{"Date" +  "\t\t" + "Time"}</Text>
                                     <ScrollView>
@@ -49,21 +50,85 @@ const FeedSystem:React.FC = ()=> {
                                         }
                                     </ScrollView>
 
-
                                 </View>
                             </View>
 
                         </View>
                         <View style={{width: '40%', alignItems: 'flex-end'}}>
-                            <FeedBucket alert={alert} setAlert={setAlert} interval={3000} feedLog={feedLog1} setFeedLog={setFeedLog1}/>
+                            <FeedBucket alert={alert} setAlert={setAlert} interval={15000} feedLog={feedLog1} setFeedLog={setFeedLog1} animal={"Pen 1"} lowFoodAlert={lowFoodAlert}/>
                         </View>
                     </View>
 
-                    {/*<View>*/}
-                    {/*    <FeedBucket level={5} interval={3000}/>*/}
-                    {/*    <FeedBucket level={5} interval={3000}/>*/}
-                    {/*</View>*/}
                 </View>
+                <View style={{paddingTop: 15}}>
+                    <View style={[styles.masterContainer,]}>
+                        <View style={{flexDirection: 'row', width: '100%'}}>
+                            <View style={{width: '60%'}}>
+                                <View>
+                                    <Text style={styles.text}>Pen 2: Feeding Log</Text>
+                                    <View style={{paddingTop: 10}}>
+                                        <Text style={styles.smallText}>{"Date" +  "\t\t" + "Time"}</Text>
+                                        <ScrollView>
+                                            {feedLog2.length > 1 ?
+                                                feedLog2.map((l)=>(
+                                                    <Text>{l}</Text>
+                                                ))
+                                                : null
+                                            }
+                                        </ScrollView>
+
+
+                                    </View>
+                                </View>
+
+                            </View>
+                            <View style={{width: '40%', alignItems: 'flex-end'}}>
+                                <FeedBucket alert={alert} setAlert={setAlert} interval={20000} feedLog={feedLog2} setFeedLog={setFeedLog2} animal={"Pen 2"} lowFoodAlert={lowFoodAlert}/>
+                            </View>
+                        </View>
+
+
+                        {/*<View>*/}
+                        {/*    <FeedBucket level={5} interval={3000}/>*/}
+                        {/*    <FeedBucket level={5} interval={3000}/>*/}
+                        {/*</View>*/}
+                    </View>
+                </View>
+                <View style={{paddingTop: 15}}>
+                    <View style={[styles.masterContainer,]}>
+                        <View style={{flexDirection: 'row', width: '100%'}}>
+                            <View style={{width: '60%'}}>
+                                <View>
+                                    <Text style={styles.text}>Pen 3: Feeding Log</Text>
+                                    <View style={{paddingTop: 10}}>
+                                        <Text style={styles.smallText}>{"Date" +  "\t\t" + "Time"}</Text>
+                                        <ScrollView>
+                                            {feedLog3.length > 1 ?
+                                                feedLog3.map((l)=>(
+                                                    <Text>{l}</Text>
+                                                ))
+                                                : null
+                                            }
+                                        </ScrollView>
+
+
+                                    </View>
+                                </View>
+
+                            </View>
+                            <View style={{width: '40%', alignItems: 'flex-end'}}>
+                                <FeedBucket alert={alert} setAlert={setAlert} interval={21000} feedLog={feedLog3} setFeedLog={setFeedLog3} animal={"Pen 3"} lowFoodAlert={lowFoodAlert}/>
+                            </View>
+                        </View>
+
+
+                        {/*<View>*/}
+                        {/*    <FeedBucket level={5} interval={3000}/>*/}
+                        {/*    <FeedBucket level={5} interval={3000}/>*/}
+                        {/*</View>*/}
+                    </View>
+                </View>
+
 
 
 
