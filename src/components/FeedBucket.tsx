@@ -23,7 +23,6 @@ const FeedBucket: React.FC<Props> = ({alert, setAlert, interval, feedLog, setFee
     const [seconds, setSeconds] = useState(interval)
     const [countFeed, setCountFeed] = useState(0)
 
-    let timeout;
 
     const feedTime = interval;
 
@@ -66,7 +65,6 @@ const FeedBucket: React.FC<Props> = ({alert, setAlert, interval, feedLog, setFee
         !tempLog.includes(feedLogItem) ? tempLog.push(feedLogItem) : null
         setFeedLog(tempLog)
 
-        clearTimeout(timeout)
         let temp = foodLevel;
         if(temp < 4){
             temp += 1;

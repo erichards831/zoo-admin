@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react"
-import {StyleSheet, View, Text, TouchableOpacity, Switch} from "react-native"
+import {StyleSheet, View, Text, TouchableOpacity, Switch, LogBox} from "react-native"
 import { Ionicon } from "./components/Icon"
 import globalColors from "./localizations/globalColors"
+import SetScheduleModal from "./components/SetScheduleModal";
 
 
 const SprinklerSystem: React.FC = ()=> {
@@ -9,7 +10,22 @@ const SprinklerSystem: React.FC = ()=> {
     const [system1, setSystem1] = useState(false)
     const [system2, setSystem2] = useState(false)
     const [system3, setSystem3] = useState(false)
+
+    const [sched1, setSched1] = useState(null)
+    const [sched1Vis, setSched1Vis] =useState(false)
+
+    const [sched2, setSched2] = useState(null)
+    const [sched2Vis, setSched2Vis] =useState(false)
+
+    const [sched3, setSched3] = useState(null)
+    const [sched3Vis, setSched3Vis] =useState(false)
+
+
     const [temp, setTemp] = useState(false)
+
+    useEffect(()=> {
+        LogBox.ignoreAllLogs()
+    })
 
 
     const toggleMasterActivation = () => {
@@ -36,7 +52,11 @@ const SprinklerSystem: React.FC = ()=> {
         setMasterAct(temp)
     }, [temp])
 
-    ///add pngs of each zone design
+
+
+    // const showModal = () =>
+
+    ///add pngs of each zone design && set schedule
     return(
         <View style={styles.container}>
             <View style={styles.masterContainer}>
@@ -82,12 +102,26 @@ const SprinklerSystem: React.FC = ()=> {
                         <Text style={styles.subtitle}>Individual Sprinkler Systems</Text>
                         <Text>Activate/Deactivate individual zone sprinker systems</Text>
                         <View style={{paddingTop: 10, }}>
-                            <View >
-                                <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
+                            <View>
+                                <View style={{paddingBottom: 10}}>
+                                <View style={[styles.masterContainer, {flexDirection: 'row', alignItems: 'center', width: '100%'}]}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             {/*<Ionicon name={lock1 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock1 ? globalColors.primaryDark: '#850808'}/>*/}
-                                            <Text style={styles.text}>Animal Pen 1</Text>
+                                            <Text style={styles.text}>Rainforest Zone</Text>
+                                        </View>
+                                        <View style={{paddingTop: 10, paddingLeft: 10, flexDirection: 'row', alignItems: 'center'}}>
+                                            <TouchableOpacity
+                                                style={[styles.schedule, sched1 ? {backgroundColor: globalColors.darkBlue, borderLeftColor: globalColors.blue}: null]}
+                                                onPress={()=> setSched1Vis(true)}
+                                            >
+                                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                    <View style={{paddingRight: 5}}>
+                                                        <Ionicon size={'medium'} name={'ios-calendar'} color={sched1 ? 'white' : 'rgba(0, 0, 0, .75)'} />
+                                                    </View>
+                                                    <Text style={styles.schedText}>{sched1 ? sched1: "Set Schedule"}</Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     <View style={{width: '40%'}}>
@@ -99,15 +133,29 @@ const SprinklerSystem: React.FC = ()=> {
                                                 onValueChange={()=> setSystem1(!system1)}/>
                                         </View>
 
-
                                     </View>
                                 </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
+                                </View>
+                                <SetScheduleModal vis={sched1Vis} setVis={setSched1Vis} sched={sched1} setSched={setSched1} zone={"Rainforest Zone"}/>
+                                <View style={{paddingBottom: 10}}>
+                                <View style={[styles.masterContainer, {flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}]}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             {/*<Ionicon name={system2 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock2 ? globalColors.primaryDark: '#850808'}/>*/}
-                                            <Text style={styles.text}>Animal Pen 2</Text>
-
+                                            <Text style={styles.text}>Arctic Zone</Text>
+                                        </View>
+                                        <View style={{paddingTop: 10, paddingLeft: 10, flexDirection: 'row', alignItems: 'center'}}>
+                                            <TouchableOpacity
+                                                style={[styles.schedule, sched2 ? {backgroundColor: globalColors.darkBlue, borderLeftColor: globalColors.blue}: null]}
+                                                onPress={()=> setSched2Vis(true)}
+                                            >
+                                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                    <View style={{paddingRight: 5}}>
+                                                        <Ionicon size={'medium'} name={'ios-calendar'} color={sched2 ? 'white' : 'rgba(0, 0, 0, .75)'} />
+                                                    </View>
+                                                    <Text style={styles.schedText}>{sched2 ? sched2: "Set Schedule"}</Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     <View style={{width: '40%'}}>
@@ -122,12 +170,29 @@ const SprinklerSystem: React.FC = ()=> {
 
                                     </View>
                                 </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
+                                </View>
+                                <SetScheduleModal vis={sched2Vis} setVis={setSched2Vis} sched={sched2} setSched={setSched2} zone={"Arctic Zone"}/>
+
+                                <View style={{paddingBottom: 10}}>
+                                <View style={[styles.masterContainer, {flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}]}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             {/*<Ionicon name={lock3 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock3 ? globalColors.primaryDark: '#850808'}/>*/}
-                                            <Text style={styles.text}>Animal Pen 3</Text>
+                                            <Text style={styles.text}>Grassland Zone</Text>
+                                        </View>
+                                        <View style={{paddingTop: 10, paddingLeft: 10, flexDirection: 'row', alignItems: 'center'}}>
+                                            <TouchableOpacity
+                                                style={[styles.schedule, sched3 ? {backgroundColor: globalColors.darkBlue, borderLeftColor: globalColors.blue}: null]}
+                                                onPress={()=> setSched3Vis(true)}
+                                            >
 
+                                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                    <View style={{paddingRight: 5}}>
+                                                        <Ionicon size={'medium'} name={'ios-calendar'} color={sched3 ? 'white' : 'rgba(0, 0, 0, .75)'} />
+                                                    </View>
+                                                    <Text style={styles.schedText}>{sched3 ? sched3: "Set Schedule"}</Text>
+                                                </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                     <View style={{width: '40%'}}>
@@ -140,6 +205,9 @@ const SprinklerSystem: React.FC = ()=> {
                                         </View>
                                     </View>
                                 </View>
+                                </View>
+                                <SetScheduleModal vis={sched3Vis} setVis={setSched3Vis} sched={sched3} setSched={setSched3} zone={"Grassland Zone"}/>
+
                             </View>
                             {/*<View style={{width: '40%'}}>*/}
                             {/*    <View style={{alignItems:'flex-end'}}>*/}
@@ -211,6 +279,25 @@ const styles = StyleSheet.create({
         width: 110,
         borderWidth: 2,
         borderColor: 'grey'
+    },
+    mediumText:{
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    schedule:{
+        width: '110%',
+        height: '100%',
+        backgroundColor: 'grey',
+        alignItems: 'flex-start',
+        padding: 5,
+        borderRadius: 5,
+        borderLeftColor: 'black',
+        borderLeftWidth: 5
+    },
+    schedText: {
+        fontWeight: '600',
+        color: 'white',
+        fontSize: 15
     }
 
 

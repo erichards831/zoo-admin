@@ -31,12 +31,10 @@ const DarkThemeApp = {
 const AppNavigator: React.FC= ()=>{
     const [alert, setAlert] = useState(true)
 
-    useEffect(()=> {
-        console.log(alert)
 
-    }, [alert])
     return(
-        <NavigationContainer theme={DarkThemeApp}>
+        <NavigationContainer theme={DarkThemeApp} >
+
             <Tab.Navigator
                 screenOptions={{
                     tabBarStyle: {
