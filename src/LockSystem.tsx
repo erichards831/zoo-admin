@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import { View, SafeAreaView, StyleSheet, Text, Switch, TouchableOpacity} from "react-native"
+import {View, SafeAreaView, StyleSheet, Text, Switch, TouchableOpacity, Image} from "react-native"
 import { Ionicon } from "./components/Icon"
 import globalColors from "./localizations/globalColors"
 import LowFoodAlert from "../src/components/LowFoodAlert"
@@ -58,8 +58,7 @@ const LockSystem: React.FC = ()=> {
                     <View style={{width: '60%'}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                             <View style={{alignSelf: 'flex-start'}}>
-                                <Ionicon name={masterLock ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={masterLock !== null ? masterLock ?  globalColors.primaryDark: globalColors.veryBad: globalColors.ok}/>
-
+                                <Ionicon name={masterLock ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={masterLock !== null ? masterLock ?  globalColors.primaryDark: globalColors.veryBad: globalColors.ok}/>
                             </View>
                             <View>
                                 <Text style={styles.subtitle}>Master Lock</Text>
@@ -98,8 +97,12 @@ const LockSystem: React.FC = ()=> {
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
-                                            <Ionicon name={lock1 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock1 ? globalColors.primaryDark: '#850808'}/>
-                                            <Text style={styles.text}>Animal Pen 1</Text>
+                                            <View style={{paddingRight: 5}}>
+                                                <Ionicon name={lock1 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock1 ? globalColors.primaryDark: '#850808'}/>
+
+                                            </View>
+                                            <Image source={require('../assets/Jaguar-main.png')} style={{width: 100, height: 100, borderRadius: 3}} />
+                                            {/*<Text style={styles.text}>Animal Pen 1</Text>*/}
                                         </View>
                                     </View>
                                     <View style={{width: '40%'}}>
@@ -117,8 +120,12 @@ const LockSystem: React.FC = ()=> {
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
-                                            <Ionicon name={lock2 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock2 ? globalColors.primaryDark: '#850808'}/>
-                                            <Text style={styles.text}>Animal Pen 2</Text>
+                                            <View style={{paddingRight: 5}}>
+                                                <Ionicon name={lock2 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock2 ? globalColors.primaryDark: '#850808'}/>
+                                            </View>
+                                            <Image source={require('../assets/Polar_Bear_-_Alaska_(cropped).jpg')} style={{width: 100, height: 100, borderRadius: 3}} />
+
+                                            {/*<Text style={styles.text}>Animal Pen 2</Text>*/}
 
                                         </View>
                                     </View>
@@ -137,8 +144,13 @@ const LockSystem: React.FC = ()=> {
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
                                     <View style={{width: '60%'}}>
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
-                                            <Ionicon name={lock3 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock3 ? globalColors.primaryDark: '#850808'}/>
-                                            <Text style={styles.text}>Animal Pen 3</Text>
+                                            <View style={{paddingRight: 5}}>
+                                                <Ionicon name={lock3 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock3 ? globalColors.primaryDark: '#850808'}/>
+                                            </View>
+                                            {/*<Ionicon name={lock3 ? 'ios-lock-closed': 'ios-lock-open'} size={'medium'} color={lock3 ? globalColors.primaryDark: '#850808'}/>*/}
+                                            <Image source={require('../assets/c1030882-3db2-4174-80e4-dbd50ac3842b-Zebra_AA_08-2022-0015761_E.webp')} style={{width: 100, height: 100, borderRadius: 3}} />
+
+                                            {/*<Text style={styles.text}>Zebra</Text>*/}
 
                                         </View>
                                     </View>

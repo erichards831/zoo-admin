@@ -41,6 +41,9 @@ const SetScheduleModal: React.FC<Props> = ({vis, setVis, sched, setSched, zone})
             setStart("9:00am")
             setEnd("5:00pm")
         }
+        if((startValid && endValid)){
+            setSched(start + "-" + end)
+        }
         setVis(false)
     }
 
@@ -55,7 +58,6 @@ const SetScheduleModal: React.FC<Props> = ({vis, setVis, sched, setSched, zone})
     }, [endFocus])
 
 
-
     useEffect(()=> {
         let startNum = start.slice(0, 2).includes(':') ? parseInt(start.slice(0, 1)) : parseInt(start.slice(0, 2))
         let endNum = end.slice(0, 2).includes(':') ? parseInt(end.slice(0, 1)) : parseInt(end.slice(0, 2))
@@ -67,7 +69,8 @@ const SetScheduleModal: React.FC<Props> = ({vis, setVis, sched, setSched, zone})
             setStartValid(false)
         }else if((start.includes('pm') && end.includes('pm'))){
             setStartValid(startNum === 12 || startNum < endNum)
-            setEndValid(startNum === 12  || endNum > startNum)
+            setEndValid(endNum !== 12  && endNum > startNum)
+
         }else if((start.includes('am') && end.includes('am'))){
             setStartValid(startNum === 12 || startNum < endNum)
             setEndValid( (startNum === 12 && startNum !== endNum) || (endNum !== 12 && endNum > startNum))
@@ -77,9 +80,7 @@ const SetScheduleModal: React.FC<Props> = ({vis, setVis, sched, setSched, zone})
             setEndValid(end.includes('pm'))
         }
 
-        if((start !== "" && end !== "") && (startValid && endValid)){
-            setSched(start + "-" + end)
-        }
+
         // if((start.includes('pm') && end.includes('am'))){
         //     setStartValid(false)
         // }else if(start.includes('pm') && end.includes('pm')){

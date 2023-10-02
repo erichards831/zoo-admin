@@ -27,7 +27,6 @@ const FeedBucket: React.FC<Props> = ({alert, setAlert, interval, feedLog, setFee
     const feedTime = interval;
 
 
-
     useEffect(()=> {
         foodLevel > 3 ? setDisable(true) : setDisable(false)
         foodLevel < 2 ? lowFoodAlert(animal): null
@@ -62,7 +61,7 @@ const FeedBucket: React.FC<Props> = ({alert, setAlert, interval, feedLog, setFee
 
         // console.log(feedDay + "\t" + feedTime)
         let tempLog = feedLog.slice()
-        !tempLog.includes(feedLogItem) ? tempLog.push(feedLogItem) : null
+        !tempLog.includes(feedTime) ? tempLog.push(feedTime) : null
         setFeedLog(tempLog)
 
         let temp = foodLevel;

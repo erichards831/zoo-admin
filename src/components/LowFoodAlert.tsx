@@ -2,6 +2,7 @@ import * as React from "react";
 import {StyleSheet, View, Text, TouchableOpacity} from "react-native"
 import globalColors from "../localizations/globalColors"
 import { Ionicon } from "./Icon";
+import {ReactNativeModal} from "react-native-modal";
 
 
 type Props = {
@@ -14,20 +15,14 @@ const LowFoodAlert:React.FC<Props> = ({animal, vis, setVis}) =>{
         setVis(false)
     }
     return (
-        <View style={styles.container}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={{width: '90%'}}>
-                    <Text style={styles.alertText}>Alert! Low food for {animal}!</Text>
-                </View>
-                <View style={{alignSelf: 'flex-end', }}>
-                    <TouchableOpacity onPress={close}>
-                        <Ionicon size={'large'} color={globalColors.veryBad} name={'ios-close'} />
-                    </TouchableOpacity>
-                </View>
+        <ReactNativeModal
+            isVisible={vis}
+            >
+            <View style={styles.container}>
 
             </View>
+        </ReactNativeModal>
 
-        </View>
     )
 }
 const styles = StyleSheet.create({

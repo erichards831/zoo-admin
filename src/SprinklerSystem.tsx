@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, TouchableOpacity, Switch, LogBox} from "react-na
 import { Ionicon } from "./components/Icon"
 import globalColors from "./localizations/globalColors"
 import SetScheduleModal from "./components/SetScheduleModal";
+import {useIsFocused} from "@react-navigation/native";
 
 
 const SprinklerSystem: React.FC = ()=> {
@@ -20,12 +21,37 @@ const SprinklerSystem: React.FC = ()=> {
     const [sched3, setSched3] = useState(null)
     const [sched3Vis, setSched3Vis] =useState(false)
 
+    const isFocused = useIsFocused()
+
 
     const [temp, setTemp] = useState(false)
+
+    const now = new Date()
+
+    useEffect(()=> {
+        // console.log(now)
+    }, [isFocused])
+
+
+    useEffect(()=> {
+        // let s1 = sched1 ? parseInt(sched1.slice(0, sched1.indexOf(':'))) : null
+        // let s2 = sched2 ? parseInt(sched2.slice(0, sched2.indexOf(':'))) : null
+        // let s3 = sched3 ? parseInt(sched3.slice(0, sched3.indexOf(':'))) : null
+        //
+        // let e1 = sched1 ? parseInt(sched1.slice(sched1.indexOf('-') + 1, )) : null;
+        // let e2 = sched2 ? parseInt(sched2.slice(sched2.indexOf('-') + 1, )) : null;
+        // let e3 = sched3 ? parseInt(sched3.slice(sched3.indexOf('-') + 1, )) : null;
+
+
+
+    }, [sched1, sched2, sched3])
+
 
     useEffect(()=> {
         LogBox.ignoreAllLogs()
     })
+
+    //set schedule post save button
 
 
     const toggleMasterActivation = () => {

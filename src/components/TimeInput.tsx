@@ -24,10 +24,10 @@ const TimeInput: React.FC<Props> = ({timeType, focused, setFocused, otherFocused
     const [scrollToIndex, setScrollToIndex] =useState("")
     const [ref, setRef] = useState(null)
     // const [focused, setFocused] = useState(false)
-
-    // useEffect(()=> {
-    //     setTime(times[times.indexOf(defaultTime)])
-    // }, [])
+    //
+    useEffect(()=> {
+        time === "" ? setTime(times[times.indexOf(defaultTime)]) : null
+    }, [])
     const pressTime = (t: string)=> {
         // setSched(t)
         setTime(t)
