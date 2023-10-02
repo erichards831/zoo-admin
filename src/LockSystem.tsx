@@ -96,13 +96,14 @@ const LockSystem: React.FC = ()=> {
                             <View >
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
                                     <View style={{width: '60%'}}>
+                                        <Text style={[styles.text, {paddingBottom: 5}]}>Jaguar Pen</Text>
+
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             <View style={{paddingRight: 5}}>
                                                 <Ionicon name={lock1 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock1 ? globalColors.primaryDark: '#850808'}/>
 
                                             </View>
                                             <Image source={require('../assets/Jaguar-main.png')} style={{width: 100, height: 100, borderRadius: 3}} />
-                                            {/*<Text style={styles.text}>Animal Pen 1</Text>*/}
                                         </View>
                                     </View>
                                     <View style={{width: '40%'}}>
@@ -119,6 +120,8 @@ const LockSystem: React.FC = ()=> {
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
                                     <View style={{width: '60%'}}>
+                                        <Text style={[styles.text, {paddingBottom: 5, paddingTop: 5}]}>Polar Bear Pen</Text>
+
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             <View style={{paddingRight: 5}}>
                                                 <Ionicon name={lock2 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock2 ? globalColors.primaryDark: '#850808'}/>
@@ -143,6 +146,8 @@ const LockSystem: React.FC = ()=> {
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center', width: '100%', paddingTop: 10}}>
                                     <View style={{width: '60%'}}>
+                                        <Text style={[styles.text, {paddingBottom: 5, paddingTop: 5}]}>Zebra Pen</Text>
+
                                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                                             <View style={{paddingRight: 5}}>
                                                 <Ionicon name={lock3 ? 'ios-lock-closed': 'ios-lock-open'} size={'large'} color={lock3 ? globalColors.primaryDark: '#850808'}/>
@@ -216,11 +221,11 @@ const styles = StyleSheet.create({
         margin: 20
     },
     subtitle: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: "600"
     },
     text: {
-        fontSize: 17,
+        fontSize: 20,
         fontWeight: '500'
     },
     masterContainer: {

@@ -68,7 +68,7 @@ const FeedSystem:React.FC = ()=> {
                     <View style={{flexDirection: 'row', width: '100%', alignItems: 'center'}}>
                         <View style={{width: '60%'}}>
                             <View>
-                                <Text style={styles.text}>Pen 1: Feeding Log</Text>
+                                <Text style={styles.text}>Jaguar:{'\n'}Feeding Log</Text>
                                 <View style={[styles.feedLogCont, {paddingTop: 10}]}>
                                     <View>
                                         <Image source={require('../assets/Jaguar-main.png')} style={{width: 175, height: 175, borderRadius: 3}} />
@@ -96,7 +96,7 @@ const FeedSystem:React.FC = ()=> {
 
                         </View>
                         <View style={{width: '40%', alignItems: 'flex-end'}}>
-                            <FeedBucket alert={alert} setAlert={setAlert} interval={20000} feedLog={feedLog1} setFeedLog={setFeedLog1} animal={"Pen 1"} lowFoodAlert={lowFoodAlert}/>
+                            <FeedBucket alert={alert} setAlert={setAlert} interval={20000} feedLog={feedLog1} setFeedLog={setFeedLog1} animal={"Jaguar Pen"} lowFoodAlert={lowFoodAlert}/>
                         </View>
                     </View>
 
@@ -106,7 +106,7 @@ const FeedSystem:React.FC = ()=> {
                         <View style={{flexDirection: 'row', width: '100%'}}>
                             <View style={{width: '60%'}}>
                                 <View>
-                                    <Text style={styles.text}>Pen 2: Feeding Log</Text>
+                                    <Text style={styles.text}>Polar Bear:{'\n'}Feeding Log</Text>
                                         <View style={[styles.feedLogCont, {paddingTop: 10, }]}>
                                             <View>
                                                 <Image source={require('../assets/Polar_Bear_-_Alaska_(cropped).jpg')} style={{width: 175, height: 175, borderRadius: 3}} />
@@ -135,7 +135,7 @@ const FeedSystem:React.FC = ()=> {
 
                             </View>
                             <View style={{width: '40%', alignItems: 'flex-end'}}>
-                                <FeedBucket alert={alert} setAlert={setAlert} interval={30000} feedLog={feedLog2} setFeedLog={setFeedLog2} animal={"Pen 2"} lowFoodAlert={lowFoodAlert}/>
+                                <FeedBucket alert={alert} setAlert={setAlert} interval={30000} feedLog={feedLog2} setFeedLog={setFeedLog2} animal={"Polar Bear Pen"} lowFoodAlert={lowFoodAlert}/>
                             </View>
                         </View>
 
@@ -151,7 +151,7 @@ const FeedSystem:React.FC = ()=> {
                         <View style={{flexDirection: 'row', width: '100%'}}>
                             <View style={{width: '60%'}}>
                                 <View>
-                                    <Text style={styles.text}>Pen 3: Feeding Log</Text>
+                                    <Text style={styles.text}>Zebra Pen:{'\n'}Feeding Log</Text>
                                     <View style={[styles.feedLogCont, {paddingTop: 10}]}>
                                         <View>
                                             <Image source={require('../assets/c1030882-3db2-4174-80e4-dbd50ac3842b-Zebra_AA_08-2022-0015761_E.webp')} style={{width: 175, height: 175, borderRadius: 3}} />
@@ -181,7 +181,7 @@ const FeedSystem:React.FC = ()=> {
 
                             </View>
                             <View style={{width: '40%', alignItems: 'flex-end'}}>
-                                <FeedBucket alert={alert} setAlert={setAlert} interval={40000} feedLog={feedLog3} setFeedLog={setFeedLog3} animal={"Pen 3"} lowFoodAlert={lowFoodAlert}/>
+                                <FeedBucket alert={alert} setAlert={setAlert} interval={40000} feedLog={feedLog3} setFeedLog={setFeedLog3} animal={"Zebra Pen"} lowFoodAlert={lowFoodAlert}/>
                             </View>
                         </View>
 
